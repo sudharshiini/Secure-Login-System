@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Secure Login</title>
+</head>
+<body>
+    <h2>Create Account</h2>
+
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p>{{ form.username.label }} {{ form.username() }}</p>
+        <p>{{ form.password.label }} {{ form.password() }}</p>
+        <p>{{ form.confirm.label }} {{ form.confirm() }}</p>
+
+        {% for field in [form.username, form.password, form.confirm] %}
+            {% for error in field.errors %}
+                <p style="color:red">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+
+        {{ form.submit() }}
+    </form>
+
+    <p><a href="{{ url_for('login') }}">Already registered? Login</a></p>
+</body>
+</html>
